@@ -26,7 +26,9 @@ function callFourSquare(location) {
         }
     });
 
-    var results = output.map(callInstagram);
+    return output.map(callInstagram);
+
+
 
   });
 }
