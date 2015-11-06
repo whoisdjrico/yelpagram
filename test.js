@@ -9,7 +9,7 @@ var foursquareAccessToken = 'YMLOF3SDTWE1CIRKNIMLNXJM5CWVDAERPXMV22ZIP4NYGFLQ';
 var locationId;
 app.use(bodyParser());
 
-function callFourSquare(location) {
+function callFourSquare(location,callback) {
   var queryUrl = 'https://api.foursquare.com/v2/venues/explore?near=' + location +  '&radius=3000&section=food&openNow=1&oauth_token=' + foursquareAccessToken + '&v=20151104';
 
   request(queryUrl, function(error, response, body){
@@ -26,7 +26,7 @@ function callFourSquare(location) {
         }
     });
 
-    return output.map(callInstagram);
+    return output.map(callback);
 
 
 
@@ -50,8 +50,6 @@ function callInstagram(obj){
         return item.images.standard_resolution.url;
       }).slice(0,3);
 
-      outputStuff(obj);
-
     });
 
   });
@@ -59,11 +57,7 @@ function callInstagram(obj){
 
 }
 
-function outputStuff(arg){
-  console.log(arg);
-}
-
-callFourSquare('34.0211764,-118.4065364');
+callFourSquare('34.0211764,-118.4065364',callInstagram);
 
 
 
